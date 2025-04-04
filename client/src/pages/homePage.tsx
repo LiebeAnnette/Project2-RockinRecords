@@ -1,18 +1,26 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../assets/styles/index.css';
+
 const HomePage = () => {
-    const backgroundStyle = {
-      backgroundImage: `url('/assets/images/redlabel.jpg')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
-      backgroundRepeat: 'no-repeat',
-      minHeight: '100vh',
-      width: '100%',
-      padding: '2rem',
-      color: 'black',
-      display: 'flex',
-      flexDirection: 'column',
-    };
-  
-    return (
-      <div style={backgroundStyle}>
-        <h1>Welcome to Rockin' Records</h1>
+  return (
+    <div className='home-page'>
+      <header>
+        <h1>Rockin' Records</h1>
+        <nav>
+          <Link to='/login' className='btn'>Login/Join Us?</Link>
+        </nav>
+      </header>
+      <main>
+        <section className='actions'>
+          <Link to ='/add-record' className='btn'>Add a New Record Here</Link>
+          <Link to ='/current-library' className='btn'>View Current Library Here</Link>
+          <Link to ='/mood-music' className='btn'>Click here for the Mood Board</Link>
+          <Link to='/wishlist' className='btn'>Rockin' Records Wishlist</Link>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default HomePage;
