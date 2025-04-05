@@ -7,28 +7,31 @@ import HomePage from './pages/HomePage';
 import AddRecordPage from './pages/AddRecordPage';
 import SearchPage from './pages/SearchPage';
 
+// Define routes
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
       {
-        index: true,
+        index: true, // This will match the base path "/"
         element: <HomePage />,
       },
       {
-        path: '/add-record',
+        path: 'add-record',
         element: <AddRecordPage />,
       },
       {
-        path: '/search',
+        path: 'search',
         element: <SearchPage />,
-      }
+      },
     ],
-  }
+  },
 ]);
 
+// Render to the DOM
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<RouterProvider router={router} />);
 }
