@@ -1,12 +1,8 @@
 import { Router } from "express";
-import recordController from "../../controllers/recordController.js";
+import recordsRoutes from "./records.ts";
 
 const router = Router();
 
-// GET all records
-router.get("/records", recordController.getAllRecords);
-
-// POST a new record
-router.post("/records", recordController.createRecord);
+router.use("/records", recordsRoutes);
 
 export default router;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import apiRoutes from "./api/index.js";
+import apiRoutes from "./api/index.ts";
 
 const router = Router();
 

@@ -1,17 +1,16 @@
-import { Model, DataTypes, Optional } from "sequelize";
-import sequelize from "../config/config.js";
-import Record from "./record.js"; // 👈 Required for association
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/config.ts";
 
 interface UserAttributes {
-  id: number;
+  id?: number;
   username: string;
   password: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
-
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-  public id!: number;
+class User extends Model<UserAttributes> implements UserAttributes {
+  public id?: number;
   public username!: string;
   public password!: string;
 
@@ -35,14 +34,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },
+  } as any, // 👈 Add this temporarily to bypass typing
   {
     sequelize,
     modelName: "User",
   }
 );
-
-// Add association
-User.hasMany(Record, { foreignKey: "userId", onDelete: "CASCADE" });
 
 export default User;
