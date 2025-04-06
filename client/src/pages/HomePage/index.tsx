@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/header'
+import Header from '../../components/header' // FIX THIS IMPORT
 import RecordModal from '../../components/recordModal';
-// import '../assets/styles/index.css';
+import useAuth from '../../hooks/useAuth';
+import '../assets/styles/index.css';
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
+  const { isAuthenticated, logout } =useAuth();
+
   const handleAddRecordClick = () => {
     setShowModal(true); // Show modal when the 'Add Record' buttin is clicked
   };
@@ -18,10 +21,16 @@ const HomePage = () => {
     <div className='home-page'>
       <header>
         <h1>Rockin' Records</h1>
-
-        {/* this nav bar needs restructuring */}
         <nav>
-          <Link to='/login' className='btn'>Login/Join Us?</Link>
+          {isAuthenticated ? (
+            <button onClick={logout} className='btn'>
+              Logout
+            </button>
+          ) : (
+            <Link to='/login' className='btn'>
+              Login
+            </Link>
+          )}
         </nav>
       </header>
       <main>
@@ -41,4 +50,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;33
+export default HomePage; 
