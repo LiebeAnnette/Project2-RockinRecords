@@ -1,5 +1,3 @@
-// WIP: WORK IN PROGRESS --- fischer 4/5/25 @ 8:05
-
 import React, { useState } from 'react';
 
 interface RecordModalProps {
@@ -17,13 +15,13 @@ const RecordModal: React.FC<RecordModalProps> = ({ closeModal }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
-    const [errors, setErrors] = useState<string[]>({});
+    const [errors, setErrors] = useState<string[]>([]);
 
     const validateForm = () => {
         const newErrors = [];
-        if (! formData.artist.trim()) newErrors.push('Artist is required.');
-        if (! formData.album.trim()) newErrors.push('Album is required.');
-        if (! formData.yearReleased) {
+        if (!formData.artist.trim()) newErrors.push('Artist is required.');
+        if (!formData.album.trim()) newErrors.push('Album is required.');
+        if (!formData.yearReleased) {
             const year = parseInt(formData.yearReleased);
             if (isNaN(year) || year <1000 || year > 9999) {
                 newErrors.push('Year Released must be a valid 4-digit number.');
@@ -50,11 +48,12 @@ const RecordModal: React.FC<RecordModalProps> = ({ closeModal }) => {
             });
 
             if(res.ok) {
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     setShowSpinner(false);
                     setSuccessMessage('🎉 Record added successfully!');
                     setFormData({ artist: '', album: '', merchant: '', yearReleased: '' });
                 }, 3000);
+            return () => clearTimeout(timeoutId);
             } else {
                 setShowSpinner(false);
                 setErrors(['Something went wrong while adding the record.']);
@@ -67,5 +66,55 @@ const RecordModal: React.FC<RecordModalProps> = ({ closeModal }) => {
         }
     };
 
-    // cont. with more code at later time -- fischer
-}
+    return (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h1>Add a New Record</h1>
+    
+            <form onSubmit={submitRecord} className="modal-form">
+              <input
+                className="modal-input"
+                placeholder="Artist"
+                value={formData.artist}
+                onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
+              />
+              <input
+                className="modal-input"
+                placeholder="Album"
+                value={formData.album}
+                onChange={(e) => setFormData({ ...formData, album: e.target.value })}
+              />
+              <input
+                className="modal-input"
+                placeholder="Merchant"
+                value={formData.merchant}
+                onChange={(e) => setFormData({ ...formData, merchant: e.target.value })}
+              />
+              <input
+                className="modal-input"
+                placeholder="Year Released"
+                value={formData.yearReleased}
+                onChange={(e) => setFormData({ ...formData, yearReleased: e.target.value })}
+              />
+              <button type="submit" disabled={isSubmitting} className="modal-btn">
+                {isSubmitting ? 'Submitting...' : 'Submit'}
+              </button>
+            </form>
+    
+            {showSpinner && <div className="spinner">⏳</div>}
+    
+            {successMessage && <div className="success-message">{successMessage}</div>}
+    
+            {errors.length > 0 && (
+              <div className="error-messages" aria-live='assertive'>
+                {errors.map((error, index) => (
+                  <div key={index}>• {error}</div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+    
+    export default RecordModal;
