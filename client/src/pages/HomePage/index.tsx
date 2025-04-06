@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/header'
 import RecordModal from '../../components/recordModal';
 // import '../assets/styles/index.css';
 
@@ -19,11 +20,9 @@ const HomePage = () => {
         <h1>Rockin' Records</h1>
 
         {/* this nav bar needs restructuring */}
-
-        {/* <nav>
+        <nav>
           <Link to='/login' className='btn'>Login/Join Us?</Link>
-        </nav> */}
-
+        </nav>
       </header>
       <main>
         <section className='actions'>
@@ -42,4 +41,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomePage;33
