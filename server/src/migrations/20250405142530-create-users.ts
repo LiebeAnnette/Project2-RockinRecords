@@ -1,4 +1,4 @@
-import { QueryInterface, DataTypes } from "sequelize";
+import { QueryInterface, DataTypes, Sequelize } from "sequelize";
 
 export default {
   up: async (queryInterface: QueryInterface) => {
@@ -21,15 +21,16 @@ export default {
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
-        defaultValue: new Date(),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
-        defaultValue: new Date(),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
+
   down: async (queryInterface: QueryInterface) => {
     await queryInterface.dropTable("Users");
   },

@@ -1,6 +1,6 @@
-import sequelize from "../config/config.js";
-import Record from "./record.js";
-import User from "./user.js";
+import sequelize from "../config/config.ts";
+import Record from "./record.ts";
+import User from "./user.ts";
 
 const connectToDatabase = async () => {
   try {

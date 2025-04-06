@@ -1,18 +1,18 @@
-import { Model, DataTypes, Optional } from "sequelize";
-import sequelize from "../config/config.js";
-import User from "./user.js"; // 👈 Required for association
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/config.ts";
+import User from "./user.ts"; // 👈 Required for association
 
 interface RecordAttributes {
-  id: number;
+  id?: number;
   title: string;
   artist: string;
   userId: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-interface RecordCreationAttributes extends Optional<RecordAttributes, "id"> {}
-
-class Record extends Model<RecordAttributes, RecordCreationAttributes> implements RecordAttributes {
-  public id!: number;
+class Record extends Model<RecordAttributes> implements RecordAttributes {
+  public id?: number;
   public title!: string;
   public artist!: string;
   public userId!: number;
