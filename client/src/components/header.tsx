@@ -1,5 +1,41 @@
-
 // WIP: WORK IN PROGRESS
-// This would be a reusable header component
-// and it makes sense to keep it if we have
-// navigation or branding elements that are shared across pages.
+
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+const Header: React.FC = () => {
+    const navigate = useNavigate();
+    const authToken = localStorage.getItem('authToken');
+
+    // Function to handle logout
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        navigate('/login');
+    };
+
+    return (
+        <header>
+            <h1>Rockin' Records</h1>
+            <nav>
+                <ul>
+                    <li><Link to='/home'>Home</Link></li>
+                    <li><Link to='/current-library'>Current Library</Link></li>
+                    <li><Link to='/wishlist'>Wishlist</Link></li>
+                </ul>
+            </nav>
+            {authToken ? (
+                <button className='logout-btn' onClick={handleLogout}>
+                    Logout
+                </button>
+            ) : (
+                <Link to='/login' className='btn'>
+
+                </Link>
+            )
+            )}
+            
+        </header>
+    )
+};
+
+export default Header;

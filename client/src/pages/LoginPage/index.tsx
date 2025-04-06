@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    const { login } = useAuth();
     const navigate = useNavigate();
+
     // handles form submission
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (username && password) {
+          login();
           navigate('/home');
         } else {
             setErrorMessage('Please enter both username and password');
@@ -30,7 +33,8 @@ const LoginPage: React.FC = () => {
                       id='username'
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      placeholder='Enter your username' required
+                      placeholder='Enter your username'
+                      required
                       />
                 </div>
 
@@ -41,10 +45,13 @@ const LoginPage: React.FC = () => {
                       id='password'
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder='Enter your password' required
+                      placeholder='Enter your password'
+                      required
                       />
                 </div>
+
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}
+
                 <button type='submit' className='login-button'>Login</button>
             </form>
         </div>
