@@ -1,3 +1,4 @@
+/* ========== Global Styles ========== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,21 +9,28 @@ html, body {
   height: 100%;
   font-family: 'Arial', sans-serif;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  transition: opacity 0.3s ease-in-out; /* Page transition */
 }
 
-/* Optional scroll behavior */
-html {
-  scroll-behavior: smooth;
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
 }
 
 
-/* EVERYTHING BELOW IS CSS FROM THE addRecordPage.tsx */
-/* General Styles */
+/* ========== Add Record Page Styles ========== */
+
+/* General */
 .home-page {
   font-family: Arial, sans-serif;
 }
@@ -34,13 +42,18 @@ html {
   text-decoration: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #555;
 }
 
 .actions {
   margin-top: 20px;
 }
 
-/* Modal Styles */
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -60,6 +73,11 @@ html {
   border-radius: 10px;
   width: 400px;
   position: relative;
+  transition: transform 0.3s ease;
+}
+
+.modal-content:hover {
+  transform: scale(1.02);
 }
 
 .close {
@@ -76,6 +94,12 @@ html {
   margin: 10px 0;
   border-radius: 5px;
   border: 1px solid #ccc;
+  transition: border-color 0.3s;
+}
+
+.modal-input:focus {
+  border-color: #4CAF50;
+  outline: none;
 }
 
 .submit-btn {
@@ -86,16 +110,16 @@ html {
   width: 100%;
   cursor: pointer;
   border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #45a049;
 }
 
 .submit-btn:disabled {
   background-color: #ccc;
-}
-
-.spinner {
-  text-align: center;
-  font-size: 24px;
-  margin-top: 10px;
+  cursor: not-allowed;
 }
 
 .success-message {
@@ -111,9 +135,9 @@ html {
 }
 
 
-/* EVERYTHING BELOW IS CSS FROM THE searchPage.tsx */
-/* Background Style */
-.search-page-background {
+/* ========== Search Page Styles ========== */
+
+.search-background {
   background-image: url('/assets/images/recordupclose.jpg');
   background-size: cover;
   background-position: center;
@@ -127,17 +151,21 @@ html {
   flex-direction: column;
 }
 
-/* Input Style */
 .search-input {
   padding: 0.5rem;
   width: 300px;
   margin-bottom: 1rem;
   border-radius: 4px;
   border: 1px solid #ccc;
+  transition: border-color 0.3s;
 }
 
-/* Button Style */
-.search-button {
+.search-input:focus {
+  border-color: #333;
+  outline: none;
+}
+
+.reset-button {
   padding: 0.5rem;
   width: 100px;
   margin-bottom: 1rem;
@@ -145,9 +173,56 @@ html {
   border: 1px solid #ccc;
   cursor: pointer;
   background-color: #f0f0f0;
+  transition: background-color 0.3s;
 }
 
-/* Spinner Style */
+.reset-button:hover {
+  background-color: #e0e0e0;
+}
+
+
+/* ========== Home Page Styles ========== */
+
+.home-background {
+  background-image: url('/assets/images/3d-music-related-scene.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+/* ========== Login Page Styles ========== */
+
+.login-background {
+  background-image: url('/assets/images/redlabel.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+/* ========== Spinner Styles ========== */
+
 .spinner {
   width: 120px;
   height: 120px;
@@ -155,9 +230,45 @@ html {
   animation: spin 2s linear infinite;
 }
 
-/* Keyframe Animation for Spinner */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
+
+/* ========== Responsive Styling ========== */
+
+@media (max-width: 768px) {
+  .search-input,
+  .reset-button {
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+
+  .home-background,
+  .login-background,
+  .search-background {
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn,
+  .submit-btn,
+  .reset-button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .search-input {
+    font-size: 1rem;
+  }
+}

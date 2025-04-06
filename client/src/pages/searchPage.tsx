@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './index.css'; 
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -52,7 +53,7 @@ const SearchPage = () => {
         );
       });
       setFilteredRecords(filtered);
-    }, 300); // 300ms delay
+    }, 300);
 
     setDebounceTimer(newTimer);
   };
@@ -62,54 +63,15 @@ const SearchPage = () => {
     setFilteredRecords(allRecords);
   };
 
-  const backgroundStyle = {
-    backgroundImage: `url('/assets/images/recordupclose.jpg')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed',
-    backgroundRepeat: 'no-repeat',
-    minHeight: '100vh',
-    width: '100%',
-    padding: '2rem',
-    color: 'black',
-    display: 'flex',
-    flexDirection: 'column' as const,
-  };
-
-  const inputStyle = {
-    padding: '0.5rem',
-    width: '300px',
-    marginBottom: '1rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  };
-
-  const buttonStyle = {
-    padding: '0.5rem',
-    width: '100px',
-    marginBottom: '1rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-    cursor: 'pointer',
-    backgroundColor: '#f0f0f0',
-  };
-
-  const spinnerStyle = {
-    width: '120px',
-    height: '120px',
-    margin: '2rem auto',
-    animation: 'spin 2s linear infinite',
-  };
-
   return (
-    <div style={backgroundStyle}>
+    <div className="search-background">
       <h1>Search Collection</h1>
 
       {showSpinner ? (
         <img
           src="/assets/images/spinning record.jpg"
           alt=""
-          style={spinnerStyle}
+          className="spinner"
         />
       ) : (
         <>
@@ -118,9 +80,9 @@ const SearchPage = () => {
             placeholder="Search by artist, album, merchant, or year"
             value={searchTerm}
             onChange={handleSearchChange}
-            style={inputStyle}
+            className="search-input"
           />
-          <button onClick={handleReset} style={buttonStyle}>
+          <button onClick={handleReset} className="reset-button">
             Reset
           </button>
 
@@ -139,13 +101,6 @@ const SearchPage = () => {
           )}
         </>
       )}
-
-      <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 };
