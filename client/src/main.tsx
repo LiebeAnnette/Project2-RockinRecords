@@ -1,37 +1,35 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App.tsx';
+import HomePage from './pages/HomePage/index.tsx';
+import LoginPage from './pages/LoginPage/index.tsx';
+import AlbumDetail from './pages/AlbumDetail.tsx';
 import './assets/styles/index.css';
 
-import App from './App';
-import HomePage from './pages/HomePage';
-import AddRecordPage from './pages/AddRecordPage';
-import SearchPage from './pages/SearchPage';
-
-// Define routes
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
       {
-        index: true, // This will match the base path "/"
-        element: <HomePage />,
+        index: true,
+        element: <HomePage />
       },
       {
-        path: 'add-record',
-        element: <AddRecordPage />,
+        path: 'login',
+        element: <LoginPage />
       },
       {
-        path: 'search',
-        element: <SearchPage />,
-      },
-    ],
-  },
+        path: 'album/:title',
+        element: <AlbumDetail />
+      }
+    ]
+  }
 ]);
 
-// Render to the DOM
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(<RouterProvider router={router} />);
-}
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
