@@ -1,5 +1,19 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-// WIP: WORK IN PROGRESS
-// This would be a reusable header component
-// and it makes sense to keep it if we have
-// navigation or branding elements that are shared across pages.
+const Header: React.FC = () => {
+    return (
+        <header>
+            <h1>Rockin' Records</h1>
+            <nav>
+                <ul>
+                    <li><Link to='/home'>Home</Link></li>
+                    <li><Link to='/current-library'>Current Library</Link></li>
+                    <li><Link to='/wishlist'>Wishlist</Link></li>
+                </ul>
+            </nav>
+        </header>
+    )
+};
+
+export default Header;
