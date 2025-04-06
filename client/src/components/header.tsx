@@ -1,7 +1,18 @@
+// WIP: WORK IN PROGRESS
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
+    const navigate = useNavigate();
+    const authToken = localStorage.getItem('authToken');
+
+    // Function to handle logout
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        navigate('/login');
+    };
+
     return (
         <header>
             <h1>Rockin' Records</h1>
@@ -12,6 +23,17 @@ const Header: React.FC = () => {
                     <li><Link to='/wishlist'>Wishlist</Link></li>
                 </ul>
             </nav>
+            {authToken ? (
+                <button className='logout-btn' onClick={handleLogout}>
+                    Logout
+                </button>
+            ) : (
+                <Link to='/login' className='btn'>
+
+                </Link>
+            )
+            )}
+            
         </header>
     )
 };
