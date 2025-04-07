@@ -1,15 +1,17 @@
-// WIP: WORK IN PROGRESS
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    isAuthenticated: boolean;
+    logout: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ isAuthenticated, logout }) => {
     const navigate = useNavigate();
-    const authToken = localStorage.getItem('authToken');
 
     // Function to handle logout
     const handleLogout = () => {
-        localStorage.removeItem('authToken');
+        logout();
         navigate('/login');
     };
 
@@ -23,19 +25,17 @@ const Header: React.FC = () => {
                     <li><Link to='/wishlist'>Wishlist</Link></li>
                 </ul>
             </nav>
-            {authToken ? (
+            {isAuthenticated ? (
                 <button className='logout-btn' onClick={handleLogout}>
                     Logout
                 </button>
             ) : (
                 <Link to='/login' className='btn'>
-
+                    Login
                 </Link>
-            )
             )}
-            
         </header>
-    )
+    );
 };
 
 export default Header;

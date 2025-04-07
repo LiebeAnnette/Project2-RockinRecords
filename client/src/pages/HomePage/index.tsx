@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/header' // FIX THIS IMPORT
+import Header from '../../components/header';
 import RecordModal from '../../components/recordModal';
 import useAuth from '../../hooks/useAuth';
 import '../assets/styles/index.css';
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
-  const { isAuthenticated, logout } =useAuth();
+  const { isAuthenticated, logout } = useAuth();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      window.location.href= '/login';
+    }
+  }, [isAuthenticated]);
 
   const handleAddRecordClick = () => {
-    setShowModal(true); // Show modal when the 'Add Record' buttin is clicked
+    setShowModal(true); // Show modal when the 'Add Record' button is clicked
   };
 
   const closeModal = () => {
@@ -19,7 +25,8 @@ const HomePage = () => {
 
   return (
     <div className='home-page'>
-      <header>
+      <Header isAuthenticated={isAuthenticated} logout={logout} />
+
         <h1>Rockin' Records</h1>
         <nav>
           {isAuthenticated ? (
@@ -32,7 +39,6 @@ const HomePage = () => {
             </Link>
           )}
         </nav>
-      </header>
       <main>
         <section className='actions'>
           <button onClick={handleAddRecordClick} className='btn'>
@@ -40,11 +46,11 @@ const HomePage = () => {
           </button>
           <Link to ='/current-library' className='btn'>View Current Library Here</Link>
           <Link to ='/mood-music' className='btn'>Click here for the Mood Board</Link>
-          <Link to='/wishlist' className='btn'>Rockin' Records Wishlist</Link>
+          <Link to ='/wishlist' className='btn'>Rockin' Records Wishlist</Link>
         </section>
       </main>
 
-      {/* Show modal when the state is true */}
+      {/* Render the RecordModal if showModal is true */}
       {showModal && <RecordModal closeModal={closeModal} />}
     </div>
   );
