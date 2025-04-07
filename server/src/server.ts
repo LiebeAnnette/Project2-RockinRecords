@@ -1,8 +1,8 @@
 // server/src/server.ts
 import express from "express";
 import cors from "cors";
-import { connectToDatabase } from "./models/index.ts";
-import routes from "./routes/index.ts"; // <- use .ts path if running via ts-node
+import { connectToDatabase } from "./models/index";
+import routes from "./routes/index"; // <- use .ts path if running via ts-node
 
 const app = express();
 const PORT = process.env.PORT || 5000;
