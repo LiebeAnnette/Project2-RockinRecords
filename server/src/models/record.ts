@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/config.ts";
-import User from "./user.ts"; // 👈 Required for association
+import sequelize from "../config/config";
+import User from "./user"; 
 
 interface RecordAttributes {
   id?: number;

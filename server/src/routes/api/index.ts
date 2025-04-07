@@ -1,5 +1,5 @@
 import { Router } from "express";
-import recordsRoutes from "./records.ts";
+import recordsRoutes from "./records";
 
 const router = Router();
 

@@ -1,5 +1,5 @@
 import express from "express";
-import Record from "../../models/record.ts";
+import Record from "../../models/record";
 const router = express.Router();
 
 // GET /api/records – Get all records for a user (temp: all records)
