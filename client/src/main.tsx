@@ -5,7 +5,7 @@ import App from './App.tsx';
 import HomePage from './pages/HomePage/index.tsx';
 import LoginPage from './pages/LoginPage/index.tsx';
 import AlbumDetail from './pages/AlbumDetail.tsx';
-import './assets/styles/index.css';
+import "./styles/index.css";
 
 const router = createBrowserRouter([
   {

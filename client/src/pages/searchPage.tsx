@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './index.css'; 
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,7 +69,7 @@ const SearchPage = () => {
       {showSpinner ? (
         <img
           src="/assets/images/spinning record.jpg"
-          alt=""
+          alt="Loading spinner"
           className="spinner"
         />
       ) : (
