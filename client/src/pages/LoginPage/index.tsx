@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import '../assets/styles/index.css';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -13,11 +14,16 @@ const LoginPage: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (username && password) {
+        const defaultUsername = 'admin'; //default username
+        const defaultPassword = 'password123'; //default password
+
+        if (username === defaultUsername && password === defaultPassword) {
           login();
           navigate('/home');
-        } else {
+        } else if (username === '' || password === '') {
             setErrorMessage('Please enter both username and password');
+        } else {
+            setErrorMessage('Invalid username or password');
         }
     };
 
