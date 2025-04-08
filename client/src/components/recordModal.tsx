@@ -1,30 +1,32 @@
 import React, { useState } from "react";
+import { useRecord } from "../context/recordContext";
 
 interface RecordModalProps {
     closeModal: () => void;
 }
 
 const RecordModal: React.FC<RecordModalProps> = ({ closeModal }) => {
+    const { addRecord } = useRecord();
     const [formData, setFormData] = useState({
-        artist: '',
-        album: '',
-        merchant: '',
-        yearReleased: '',
+        artist: "",
+        album: "",
+        merchant: "",
+        yearReleased: "",
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState("");
     const [errors, setErrors] = useState<string[]>([]);
 
     const validateForm = () => {
         const newErrors = [];
-        if (!formData.artist.trim()) newErrors.push('Artist is required.');
-        if (!formData.album.trim()) newErrors.push('Album is required.');
+        if (!formData.artist.trim()) newErrors.push("Artist is required.");
+        if (!formData.album.trim()) newErrors.push("Album is required.");
         if (!formData.yearReleased) {
             const year = parseInt(formData.yearReleased);
             if (isNaN(year) || year <1000 || year > 9999) {
-                newErrors.push('Year Released must be a valid 4-digit number.');
+                newErrors.push("Year Released must be a valid 4-digit number.");
             }
         }
         setErrors(newErrors);
@@ -37,40 +39,32 @@ const RecordModal: React.FC<RecordModalProps> = ({ closeModal }) => {
 
         setIsSubmitting(true);
         setShowSpinner(true);
-        setSuccessMessage('');
+        setSuccessMessage("");
         setErrors([]);
 
-        try {
-            const res = await fetch('api/records', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
+        addRecord(formData);
 
-            if(res.ok) {
-                const timeoutId = setTimeout(() => {
-                    setShowSpinner(false);
-                    setSuccessMessage('🎉 Record added successfully!');
-                    setFormData({ artist: '', album: '', merchant: '', yearReleased: '' });
-                }, 3000);
-            return () => clearTimeout(timeoutId);
-            } else {
-                setShowSpinner(false);
-                setErrors(['Something went wrong while adding the record.']);
-            }
-        } catch (err) {
-            setShowSpinner(false);
-            setErrors(['Server error. Please try again later.']);
-        } finally {
-            setTimeout(() => setIsSubmitting(false), 3000);
-        }
+        setShowSpinner(false);
+        setSuccessMessage("🎉 Record added successfully!");
+        setFormData({ artist: "", album: "", merchant: "", yearReleased: "" });
+
+        setTimeout(() => setIsSubmitting(false), 3000);
+    };
+
+    const handleAddAnother = () => {
+      setFormData({ artist: "", album: "", merchant: "", yearReleased: "" });
+      setSuccessMessage("");
+    };
+    
+    const handleClose = () => {
+      closeModal();
+      setFormData({ artist: "", album: "", merchant: "", yearReleased: "" });
     };
 
     return (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h1>Add a New Record</h1>
-    
             <form onSubmit={submitRecord} className="modal-form">
               <input
                 className="modal-input"
@@ -103,10 +97,22 @@ const RecordModal: React.FC<RecordModalProps> = ({ closeModal }) => {
     
             {showSpinner && <div className="spinner">⏳</div>}
     
-            {successMessage && <div className="success-message">{successMessage}</div>}
+            {successMessage && (
+              <div className="success-message">
+                {successMessage}
+                <div className="actions">
+                  <button onClick={handleAddAnother} className="btn">
+                    Add Another?
+                  </button>
+                  <button onClick={handleClose} className="btn">
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
     
             {errors.length > 0 && (
-              <div className="error-messages" aria-live='assertive'>
+              <div className="error-messages" aria-live="assertive">
                 {errors.map((error, index) => (
                   <div key={index}>• {error}</div>
                 ))}
