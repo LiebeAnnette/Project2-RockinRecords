@@ -1,11 +1,11 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import Navbar from './components/navBar';
-import { useEffect } from 'react';
-import useAuth from './hooks/useAuth';
-import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
-import AlbumDetail from './pages/AlbumDetail';
-import SearchPage from './pages/searchPage';
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Navbar from "./components/navBar";
+import { useEffect } from "react";
+import useAuth from "./hooks/useAuth";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import AlbumDetail from "./pages/AlbumDetail";
+import SearchPage from "./pages/searchPage";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
