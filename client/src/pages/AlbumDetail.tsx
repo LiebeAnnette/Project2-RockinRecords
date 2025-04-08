@@ -23,10 +23,7 @@ function AlbumDetail() {
       // Save search to localStorage
       const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
       if (!history.includes(title)) {
-        localStorage.setItem(
-          "searchHistory",
-          JSON.stringify([...history, title])
-        );
+        localStorage.setItem("searchHistory", JSON.stringify([...history, title]));
       }
 
       try {
@@ -66,7 +63,10 @@ function AlbumDetail() {
         >
           ← Back to Library
         </button>
-        <button onClick={handleClearHistory} className="text-red-500 underline">
+        <button
+          onClick={handleClearHistory}
+          className="text-red-500 underline"
+        >
           🗑️ Clear Search History
         </button>
       </nav>
@@ -76,13 +76,46 @@ function AlbumDetail() {
       ) : albumData ? (
         <div>
           <h1 className="text-2xl font-bold mb-2">{albumData.title}</h1>
+
           {albumData.cover_image && (
             <img
               src={albumData.cover_image}
               alt={albumData.title}
-              className="w-64 mb-4"
+              className="w-64 mb-4 cursor-pointer"
+              onClick={() => {
+                const imageUrl = albumData.cover_image!;
+                const newWin = window.open('', '_blank', 'width=800,height=600');
+
+                if (newWin) {
+                  newWin.document.write(`
+                    <html>
+                      <head>
+                        <title>${albumData.title}</title>
+                        <style>
+                          html, body {
+                            margin: 0;
+                            padding: 0;
+                            height: 100%;
+                            overflow: hidden;
+                          }
+                          body {
+                            background-image: url('${imageUrl}');
+                            background-size: cover;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                          }
+                        </style>
+                      </head>
+                      <body>
+                      </body>
+                    </html>
+                  `);
+                  newWin.document.close();
+                }
+              }}
             />
           )}
+
           <p>
             <strong>Year:</strong> {albumData.year || "N/A"}
           </p>

@@ -6,11 +6,13 @@ import HomePage from './pages/HomePage/index.tsx';
 import LoginPage from './pages/LoginPage/index.tsx';
 import AlbumDetail from './pages/AlbumDetail.tsx';
 import "./styles/index.css";
+import ErrorPage from './pages/ErrorPage/index.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         index: true,

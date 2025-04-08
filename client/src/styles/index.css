@@ -272,3 +272,39 @@ body {
     font-size: 1rem;
   }
 }
+/* ========== Error Page Styles ========== */
+
+.broken-glass-background {
+  background-image: url('/assets/images/broken-glass.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.broken-glass-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* dark overlay */
+  z-index: 1;
+}
+
+.broken-glass-content {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9); /* light transparent box */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  color: black;
+}
