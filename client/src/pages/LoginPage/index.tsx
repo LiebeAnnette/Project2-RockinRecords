@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
     // This is where we would call our API for real login (JWT)
     // For now, we are simulating a successful login with the useAuth hook
     login();
-    navigate('/home');
+    navigate('/');
   } catch (error) {
     setErrorMessage('Invalid username or password');
   }
