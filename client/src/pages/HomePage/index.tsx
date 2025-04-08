@@ -36,10 +36,10 @@ const HomePage = () => {
       <main>
         <section className="actions">
           <button onClick={handleAddRecordClick} className="btn">
-            Add a New Record Here
+            Add a New Record
           </button>
           <Link to="/current-library" className="btn">
-            View Current Library Here
+            View Current Library
           </Link>
           <Link to="/mood-music" className="btn">
             Click here for the Mood Board
@@ -47,26 +47,6 @@ const HomePage = () => {
           <Link to="/wishlist" className="btn">
             Rockin' Records Wishlist
           </Link>
-        </section>
-        <section className="library mt-8">
-          <h2>Your Library</h2>
-          <ul>
-            {[
-              { title: "Rumours", artist: "Fleetwood Mac" },
-              { title: "Abbey Road", artist: "The Beatles" },
-              { title: "Thriller", artist: "Michael Jackson" },
-            ].map((album) => (
-              <li key={album.title} className="mb-2">
-                <Link
-                  to={`/album/${encodeURIComponent(album.title)}`}
-                  className="text-blue-600 underline"
-                >
-                  {album.title}
-                </Link>{" "}
-                <span className="text-gray-700">by {album.artist}</span>
-              </li>
-            ))}
-          </ul>
         </section>
       </main>
 
