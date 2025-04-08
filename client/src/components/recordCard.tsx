@@ -1,3 +1,6 @@
-import { Link } from "react-router-dom";
 
-<Link to={`/album/${encodeURIComponent(record.title)}`}>{record.title}</Link>;
+// This is WIP for future development
+
+const RecordCard = () => <div>Record Card Placeholder</div>;
+
+export default RecordCard;
