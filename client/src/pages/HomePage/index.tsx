@@ -48,6 +48,27 @@ const HomePage = () => {
             Rockin' Records Wishlist
           </Link>
         </section>
+        <section className="library mt-8">
+          <h2>Your Library</h2>
+          <ul>
+            {[
+              { title: "Rumours", artist: "Fleetwood Mac" },
+              { title: "Abbey Road", artist: "The Beatles" },
+              { title: "Thriller", artist: "Michael Jackson" },
+            ].map((album) => (
+              <li key={album.title} className="mb-2">
+                <Link
+                  to={`/album/${encodeURIComponent(album.title)}`}
+                  state={{ artist: album.artist }}
+                  className="text-blue-600 underline"
+                >
+                  {album.title}
+                </Link>{" "}
+                <span className="text-gray-700">by {album.artist}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
 
       {showModal && <RecordModal closeModal={closeModal} />}
