@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start-proxy": "node -e \"require('cors-anywhere').createServer({ originWhitelist: [], requireHeader: ['origin','x-requested-with'], removeHeaders: ['cookie','cookie2'] }).listen(8080, () => console.log('🚀 Proxy running on http://localhost:8080'))\""
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1"
@@ -21,6 +23,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "connect-history-api-fallback": "^2.0.0",
+    "cors-anywhere": "^0.4.4",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
