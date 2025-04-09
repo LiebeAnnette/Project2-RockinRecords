@@ -8,7 +8,8 @@ import LoginPage from "./pages/LoginPage/index.tsx";
 import AlbumDetail from "./pages/AlbumDetail.tsx";
 import CurrentLibraryPage from "./pages/CurrentLibrary/index.tsx";
 import ErrorPage from "./pages/ErrorPage/index.tsx";
-import GenresPage from "./pages/GenresPage.tsx"; 
+import GenresPage from "./pages/GenresPage.tsx";
+import CollaboratorsPage from "./pages/CollaboratorsPage.tsx"; 
 
 const router = createBrowserRouter([
   {
@@ -33,8 +34,12 @@ const router = createBrowserRouter([
         element: <CurrentLibraryPage />
       },
       {
-        path: "genres", 
+        path: "genres",
         element: <GenresPage />
+      },
+      {
+        path: "collaborators",
+        element: <CollaboratorsPage />
       }
     ]
   }

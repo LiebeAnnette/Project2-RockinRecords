@@ -37,6 +37,10 @@ const HomePage = () => {
           <Link to="/wishlist" className="btn">
             Rockin' Records Wishlist
           </Link>
+
+          <Link to="/collaborators" className="btn">
+            Collaborators
+          </Link>
         </section>
 
         <section className="library">

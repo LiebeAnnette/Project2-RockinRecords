@@ -9,9 +9,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start-proxy": "node -e \"require('cors-anywhere').createServer({ originWhitelist: [], requireHeader: ['origin','x-requested-with'], removeHeaders: ['cookie','cookie2'] }).listen(8080, () => console.log('🚀 Proxy running on http://localhost:8080'))\""
-
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1"
