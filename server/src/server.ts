@@ -1,8 +1,9 @@
-// server/src/server.ts
+
 import express from "express";
 import cors from "cors";
+import fetch from "node-fetch"; 
 import { connectToDatabase } from "./models/index";
-import routes from "./routes/index"; // <- use .ts path if running via ts-node
+import routes from "./routes/index";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,13 +15,48 @@ app.use(express.json());
 // Routes
 app.use(routes);
 
+app.get("/api/genres", async (_req, res) => {
+  try {
+    const response = await fetch("https://api.deezer.com/genre");
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching genres:", error);
+    res.status(500).json({ error: "Failed to fetch genres" });
+  }
+});
+
+app.get("/api/genre/:genreId/artists", async (req, res) => {
+  const { genreId } = req.params;
+  try {
+    const response = await fetch(`https://api.deezer.com/genre/${genreId}/artists`);
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error("Error fetching artists:", err);
+    res.status(500).json({ error: "Failed to fetch artists" });
+  }
+});
+
+app.get("/api/artist/:artistId/top", async (req, res) => {
+  const { artistId } = req.params;
+  try {
+    const response = await fetch(`https://api.deezer.com/artist/${artistId}/top?limit=10`);
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error("Error fetching top tracks:", err);
+    res.status(500).json({ error: "Failed to fetch tracks" });
+  }
+});
+
+// Root route
 app.get("/", (_req, res) => {
   res.send("Rockin Records API is live!");
 });
 
 connectToDatabase();
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

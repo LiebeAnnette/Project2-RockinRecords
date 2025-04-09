@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import App from "./App.tsx";
 import HomePage from "./pages/HomePage/index.tsx";
 import LoginPage from "./pages/LoginPage/index.tsx";
@@ -8,6 +9,8 @@ import AlbumDetail from "./pages/AlbumDetail.tsx";
 import CurrentLibraryPage from "./pages/CurrentLibrary/index.tsx";
 import ErrorPage from "./pages/ErrorPage/index.tsx";
 import { RecordProvider } from "./context/recordContext";
+import GenresPage from "./pages/GenresPage.tsx";
+import CollaboratorsPage from "./pages/CollaboratorsPage.tsx"; 
 
 const router = createBrowserRouter([
   {
@@ -29,10 +32,23 @@ const router = createBrowserRouter([
       },
       {
         path: "current-library",
+
         element: <CurrentLibraryPage />,
       },
     ],
   },
+        element: <CurrentLibraryPage />
+      },
+      {
+        path: "genres",
+        element: <GenresPage />
+      },
+      {
+        path: "collaborators",
+        element: <CollaboratorsPage />
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
