@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/index.tsx";
 import AlbumDetail from "./pages/AlbumDetail.tsx";
 import CurrentLibraryPage from "./pages/CurrentLibrary/index.tsx";
 import ErrorPage from "./pages/ErrorPage/index.tsx";
+import { RecordProvider } from "./context/recordContext";
 import GenresPage from "./pages/GenresPage.tsx";
 import CollaboratorsPage from "./pages/CollaboratorsPage.tsx"; 
 
@@ -19,18 +20,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
         path: "login",
-        element: <LoginPage />
+        element: <LoginPage />,
       },
       {
         path: "album/:title",
-        element: <AlbumDetail />
+        element: <AlbumDetail />,
       },
       {
         path: "current-library",
+
+        element: <CurrentLibraryPage />,
+      },
+    ],
+  },
         element: <CurrentLibraryPage />
       },
       {
@@ -47,6 +53,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RecordProvider>
+      <RouterProvider router={router} />
+    </RecordProvider>
   </React.StrictMode>
 );
