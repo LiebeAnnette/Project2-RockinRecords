@@ -30,15 +30,7 @@ const router = createBrowserRouter([
         path: "album/:title",
         element: <AlbumDetail />,
       },
-      {
-        path: "current-library",
 
-        element: <CurrentLibraryPage />,
-      },
-    ],
-  },
-        element: <CurrentLibraryPage />
-      },
       {
         path: "genres",
         element: <GenresPage />
@@ -46,9 +38,14 @@ const router = createBrowserRouter([
       {
         path: "collaborators",
         element: <CollaboratorsPage />
-      }
-    ]
-  }
+      },
+      {
+        path: "current-library",
+
+        element: <CurrentLibraryPage />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
