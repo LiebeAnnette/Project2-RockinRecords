@@ -21,6 +21,7 @@ const HomePage = () => {
       <Header isAuthenticated={isAuthenticated} logout={logout} />
 
       <h1>Rockin' Records</h1>
+
       <nav>
         {isAuthenticated ? (
           <button onClick={logout} className="btn">
@@ -38,16 +39,23 @@ const HomePage = () => {
           <button onClick={handleAddRecordClick} className="btn">
             Add a New Record
           </button>
+
           <Link to="/current-library" className="btn">
             View Current Library
           </Link>
-          <Link to="/mood-music" className="btn">
-            Click here for the Mood Board
+
+          <Link to="/genres" className="btn">
+            Musical Genres
           </Link>
+
           <Link to="/wishlist" className="btn">
             Rockin' Records Wishlist
           </Link>
+          <p style={{ color: "#aaa", fontSize: "0.9rem", marginTop: "0.5rem" }}>
+            (Under Construction)
+          </p>
         </section>
+
         <section className="library mt-8">
           <h2>Your Library</h2>
           <ul>
