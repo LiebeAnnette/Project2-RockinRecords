@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 interface DiscogsResult {
@@ -13,8 +13,11 @@ interface DiscogsResult {
 function AlbumDetail() {
   const { title } = useParams<{ title: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const artist = location.state?.artist;
   const [albumData, setAlbumData] = useState<DiscogsResult | null>(null);
   const [loading, setLoading] = useState(true);
+  const [videos, setVideos] = useState<any[]>([]);
 
   useEffect(() => {
     async function fetchDiscogsData() {
@@ -51,6 +54,41 @@ function AlbumDetail() {
 
     fetchDiscogsData();
   }, [title]);
+  useEffect(() => {
+    async function fetchDiscogsData() {
+      if (!title) return;
+      // ... Discogs logic
+    }
+
+    fetchDiscogsData();
+  }, [title]);
+
+  // 👇 Paste your YouTube fetch effect here:
+  useEffect(() => {
+    if (!artist) return;
+
+    const fetchYouTubeVideos = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+        const searchQuery = encodeURIComponent(`${artist} live performance`);
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&type=video&maxResults=5&key=${apiKey}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.items) {
+          setVideos(data.items);
+        } else {
+          setVideos([]);
+        }
+      } catch (err) {
+        console.error("YouTube API error:", err);
+        setVideos([]);
+      }
+    };
+
+    fetchYouTubeVideos();
+  }, [artist]);
 
   const handleClearHistory = () => {
     localStorage.removeItem("searchHistory");
@@ -95,6 +133,32 @@ function AlbumDetail() {
           <p>
             <strong>Style:</strong> {albumData.style?.join(", ") || "N/A"}
           </p>
+          {artist && (
+            <div className="mt-8">
+              <h2 className="text-xl font-bold mb-2">
+                YouTube Results for {artist}
+              </h2>
+              {videos.length > 0 ? (
+                <ul>
+                  {videos.map((video, i) => (
+                    <li key={i} className="mb-4">
+                      <p className="font-semibold">{video.snippet.title}</p>
+                      <a
+                        href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline"
+                      >
+                        Watch on YouTube
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No videos found for this artist.</p>
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <p>No results found for "{title}"</p>

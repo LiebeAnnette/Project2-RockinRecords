@@ -66,6 +66,7 @@ const HomePage = () => {
               <li key={album.title} className="mb-2">
                 <Link
                   to={`/album/${encodeURIComponent(album.title)}`}
+                  state={{ artist: album.artist }}
                   className="text-blue-600 underline"
                 >
                   {album.title}
