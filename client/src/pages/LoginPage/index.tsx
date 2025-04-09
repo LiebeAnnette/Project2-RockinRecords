@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -9,21 +9,24 @@ const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const defaultUsername = 'admin';
-    const defaultPassword = 'password123';
-
-    if (username === defaultUsername && password === defaultPassword) {
-      login();
-      navigate('/home');
-    } else if (username === '' || password === '') {
+    if (username === '' || password === '') {
       setErrorMessage('Please enter both username and password');
-    } else {
-      setErrorMessage('Invalid username or password');
-    }
-  };
+      return;
+  }
+
+  try {
+    // This is where we would call our API for real login (JWT)
+    // For now, we are simulating a successful login with the useAuth hook
+    login();
+    navigate('/');
+  } catch (error) {
+    setErrorMessage('Invalid username or password');
+  }
+};
+
 
   return (
     <div className="login-background">

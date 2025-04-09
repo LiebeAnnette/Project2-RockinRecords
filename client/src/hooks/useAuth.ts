@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -17,12 +17,12 @@ const useAuth = () => {
     const logout = () => {
         setIsAuthenticated(false);
         localStorage.removeItem('isAuthenticated'); // Remove from localStorage
-        navigate('/login'); // Redirect to LoginPage after logout
+        navigate('/login');
     };
     const login = () => {
         setIsAuthenticated(true);
         localStorage.setItem('isAuthenticated', 'true'); // Store in localStorage
-        navigate('/home'); // Redirect to HomePage after login
+        navigate('/home');
     };
 
     return {

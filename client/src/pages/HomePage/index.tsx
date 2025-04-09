@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/header";
 import RecordModal from "../../components/recordModal";
@@ -7,13 +7,6 @@ import useAuth from "../../hooks/useAuth";
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const { isAuthenticated, logout } = useAuth();
-
-  //TEMPORARILY COMMENTING OUT SO i CAN TEST HOME PAGE - LIEBE
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     window.location.href = "/login";
-  //   }
-  // }, [isAuthenticated]);
 
   const handleAddRecordClick = () => {
     setShowModal(true);
@@ -43,10 +36,10 @@ const HomePage = () => {
       <main>
         <section className="actions">
           <button onClick={handleAddRecordClick} className="btn">
-            Add a New Record Here
+            Add a New Record
           </button>
           <Link to="/current-library" className="btn">
-            View Current Library Here
+            View Current Library
           </Link>
           <Link to="/mood-music" className="btn">
             Click here for the Mood Board
