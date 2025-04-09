@@ -20,20 +20,6 @@ const HomePage = () => {
     <div className="home-background">
       <Header isAuthenticated={isAuthenticated} logout={logout} />
 
-      <h1>Rockin' Records</h1>
-
-      <nav>
-        {isAuthenticated ? (
-          <button onClick={logout} className="btn">
-            Logout
-          </button>
-        ) : (
-          <Link to="/login" className="btn">
-            Login
-          </Link>
-        )}
-      </nav>
-
       <main>
         <section className="actions">
           <button onClick={handleAddRecordClick} className="btn">
@@ -51,12 +37,9 @@ const HomePage = () => {
           <Link to="/wishlist" className="btn">
             Rockin' Records Wishlist
           </Link>
-          <p style={{ color: "#aaa", fontSize: "0.9rem", marginTop: "0.5rem" }}>
-            (Under Construction)
-          </p>
         </section>
 
-        <section className="library mt-8">
+        <section className="library">
           <h2>Your Library</h2>
           <ul>
             {[
@@ -64,15 +47,15 @@ const HomePage = () => {
               { title: "Abbey Road", artist: "The Beatles" },
               { title: "Thriller", artist: "Michael Jackson" },
             ].map((album) => (
-              <li key={album.title} className="mb-2">
+              <li key={album.title} className="album-entry">
                 <Link
                   to={`/album/${encodeURIComponent(album.title)}`}
                   state={{ artist: album.artist }}
-                  className="text-blue-600 underline"
+                  className="btn-link"
                 >
                   {album.title}
                 </Link>{" "}
-                <span className="text-gray-700">by {album.artist}</span>
+                <span className="text-gray">by {album.artist}</span>
               </li>
             ))}
           </ul>
