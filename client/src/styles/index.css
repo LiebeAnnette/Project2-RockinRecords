@@ -15,7 +15,7 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  transition: opacity 0.3s ease-in-out; /* Page transition */
+  transition: opacity 0.3s ease-in-out; 
 }
 
 .fade-enter {
@@ -36,21 +36,34 @@ body {
 }
 
 .btn {
-  padding: 10px 20px;
-  background-color: #333;
+  background-color: #333; 
   color: white;
-  text-decoration: none;
-  border-radius: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0; 
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  margin: 0 8px;
+  box-shadow: 0 4px 0 #1a1a1a, 0 4px 6px rgba(0, 0, 0, 0.3); 
+  position: relative;
+  top: 0;
 }
 
 .btn:hover {
   background-color: #555;
+  top: 2px;
+  box-shadow: 0 2px 0 #1a1a1a, 0 2px 4px rgba(0, 0, 0, 0.3); 
 }
+
 
 .actions {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* Modal */
