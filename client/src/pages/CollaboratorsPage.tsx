@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 
 const collaborators = [
@@ -18,13 +17,13 @@ const collaborators = [
   {
     name: "Fischer Almanza",
     image: "/assets/images/fischer-pic.jpg",
-    bio: "Designed the database, added the search functionality and bug extermination.",
-    GitHub: "",
+    bio: "Front and Back End Design, added the search functionality and bug extermination.",
+    GitHub: "https://github.com/Falmanza94",
   },
   {
     name: "T. Mina Draper-Hammond",
     image: "/assets/images/mina-pic.jpg",
-    bio: "Metal master implemented music genres integration, overall CSS styling and bug extermination.",
+    bio: "Metal master of music genres integration, overall rockin' CSS styling and bug extermination.",
     GitHub: "https://github.com/VampMina528",
   },
 ];
@@ -33,7 +32,7 @@ export default function CollaboratorsPage() {
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  
 
   const current = collaborators[index];
 
@@ -56,21 +55,7 @@ export default function CollaboratorsPage() {
 
   return (
     <div className="collaborators-page">
-      <button
-        onClick={() => navigate("/")}
-        style={{
-          backgroundColor: "white",
-          color: "black",
-          padding: "10px 20px",
-          borderRadius: "6px",
-          marginBottom: "20px",
-          cursor: "pointer",
-          border: "none",
-        }}
-      >
-        Back to Home
-      </button>
-
+      
       <div
       className={classNames({
           "transition-opacity": true,
