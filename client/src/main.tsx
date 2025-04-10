@@ -12,6 +12,7 @@ import ErrorPage from "./pages/ErrorPage/index.tsx";
 import { RecordProvider } from "./context/recordContext";
 import GenresPage from "./pages/GenresPage.tsx";
 import CollaboratorsPage from "./pages/CollaboratorsPage.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "login",

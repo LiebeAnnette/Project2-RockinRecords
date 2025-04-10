@@ -34,20 +34,20 @@ router.post("/login", async (req, res) => {
   }
 });
 // CREATED A TEST USER FOR DEBUGGING - LIEBE
-// router.post("/seed-user", async (req, res) => {
-//   try {
-//     const hashedPassword = await bcrypt.hash("test1234", 10);
+router.post("/seed-user", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash("test1234", 10);
 
-//     const newUser = await User.create({
-//       username: "testuser",
-//       password: hashedPassword,
-//     });
+    const newUser = await User.create({
+      username: "testuser",
+      password: hashedPassword,
+    });
 
-//     res.json({ message: "Test user created", user: newUser });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Failed to create test user" });
-//   }
-// });
+    res.json({ message: "Test user created", user: newUser });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to create test user" });
+  }
+});
 
 export default router;
