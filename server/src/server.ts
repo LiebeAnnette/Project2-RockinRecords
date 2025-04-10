@@ -6,10 +6,10 @@ import cors from "cors";
 import fetch from "node-fetch";
 import path from "path";
 import { connectToDatabase } from "./models/index";
+
 import routes from "./routes/index";
 import recordsRoute from "./routes/api/records";
-
-routes.use("/", recordsRoute);
+import loginRoute from "./routes/api/login";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +26,8 @@ app.get("/", (_req, res) => {
 });
 
 // Routes
+routes.use("/records", recordsRoute);
+routes.use("/login", loginRoute);
 app.use("/api", routes);
 
 // ✅ Health check route
