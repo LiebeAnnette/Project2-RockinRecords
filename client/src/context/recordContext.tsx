@@ -3,8 +3,6 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface Record {
   artist: string;
   album: string;
-  merchant: string;
-  yearReleased: string;
 }
 
 interface RecordContextType {
@@ -14,13 +12,11 @@ interface RecordContextType {
 
 const RecordContext = createContext<RecordContextType | undefined>(undefined);
 
-export const RecordProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [records, setRecords] = useState<Record[]>([]);
 
   const addRecord = async (newRecord: Record) => {
-    const token = localStorage.getItem("token"); // pull JWT from localStorage
+    const token = localStorage.getItem("token");
 
     if (!token) {
       console.error("No token found. User might not be authenticated.");
@@ -42,8 +38,6 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({
       }
 
       const savedRecord = await response.json();
-
-      // Optionally add it to local state
       setRecords((prev) => [...prev, savedRecord]);
     } catch (err) {
       console.error("Error saving record:", err);

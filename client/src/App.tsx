@@ -1,6 +1,6 @@
 import "./styles/index.css";
 import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "./components/navBar";
+import NavBar from "./components/NavBar";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -8,7 +8,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      {!isLoginPage && <Navbar />}
+      {!isLoginPage && <NavBar />}
       <main className="container mt-5">
         <Outlet />
       </main>
