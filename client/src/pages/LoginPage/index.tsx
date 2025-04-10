@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
@@ -21,6 +21,22 @@ const LoginPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
+  useEffect(() => {
+    // TEMP: Auto-seed test user
+    fetch("/api/seed-user", { method: "POST" })
+      .then((res) => res.json())
+      .then((data) => console.log("✅ Seed response:", data))
+      .catch((err) => console.error("❌ Seeding error:", err));
+  }, []);
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

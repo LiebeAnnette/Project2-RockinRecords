@@ -12,7 +12,7 @@ Rockin' Records is a full-stack music collection manager where users can browse,
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: (Coming soon / handled in client repo)
+- **Frontend**: Handled in client repo using React
 - **Backend**: Node.js, Express, Sequelize
 - **Database**: PostgreSQL
 - **Environment**: TypeScript, dotenv, nodemon, sequelize-cli
@@ -37,11 +37,22 @@ npm install
 
 ```bash
 DB_NAME=myvinyl_db
-DB_USER=your_username
-DB_PASSWORD=your_password
+DB_USER=postgres
+DB_PASSWORD=root
+DB_HOST=localhost
+DB_PORT=5432
+JWT_SECRET=superSecretStringHere
 ```
 
 Or edit `config/config.json` if using that instead of `.env`.
+### Demo Login
+
+- **Username**: `testuser`
+- **Password**: `test1234`
+
+> ⚠️ _Your browser may warn that this password is commonly used — this is expected in demo environments._
+
+
 
 ### 4. Create the database
 
@@ -66,12 +77,16 @@ npm run dev
 ## 🧑‍🤝‍🧑 Collaborators
 
 - [@LiebeAnnette](https://github.com/LiebeAnnette)
-- [@YourGitHubUsernameHere](#) <!-- Add yourself here or list teammates -->
+- [@MinaDraper-Hammond](https://github.com/VampMina528)
+- [@MattBloch](https://github.com/MattB-ks)
+- [@FischerAlmanza](https://github.com/Falmanza94)
 
 ## 📌 Future Features
 
-- User authentication (JWT)
-- Frontend React integration
+- Connections to BandsInTown for possible tour dates
+- Full collection of vinyl added to database
+- Full track and/or album listening capability
+- Wishlist of vinyl page
 - Mobile responsiveness
 - Album artwork and metadata via external APIs
 
