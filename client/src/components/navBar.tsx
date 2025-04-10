@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 const NavBar: React.FC = () => {
   return (
-    <nav style={{ padding: "1rem", background: "#F0F0F0" }}>
-      <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
+    <nav style={{ padding: "1rem", background: "#0d0909"}}>
+      <ul style={{ listStyle: "inside", display: "flex", gap: "200px" }}>
         <li>
           <a
             href="https://recordstoreday.com/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ textDecoration: "none", fontWeight: "bold" }}
+            style={{ textDecoration: "underline  #ff3028", fontWeight: "900", fontSize: "30px" }}
           >
             Record Store Day
           </a>
@@ -19,7 +19,7 @@ const NavBar: React.FC = () => {
             href="https://upcomingvinyl.com/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ textDecoration: "none", fontWeight: "bold" }}
+            style={{ textDecoration: "underline  #ff3028", fontWeight: "900", fontSize: "30px"}}
           >
             Upcoming Vinyl
           </a>
@@ -29,7 +29,7 @@ const NavBar: React.FC = () => {
             href="https://victrola.com/collections/retro"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ textDecoration: "none", fontWeight: "bold" }}
+            style={{ textDecoration: "underline  #ff3028", fontWeight: "900", fontSize: "30px"}}
           >
             Victrola
           </a>
@@ -39,7 +39,7 @@ const NavBar: React.FC = () => {
             href="https://en.wikipedia.org/wiki/Phonograph_record"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ textDecoration: "none", fontWeight: "bold" }}
+            style={{ textDecoration: "underline  #ff3028", fontWeight: "900", fontSize: "30px"}}
           >
             What is Vinyl?
           </a>
