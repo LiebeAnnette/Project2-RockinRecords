@@ -2,6 +2,9 @@ import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
+
 export const authFetch = (url: string, options: RequestInit = {}) => {
   const token = localStorage.getItem("token");
 
@@ -31,7 +34,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     // TEMP: Auto-seed test user
-    fetch("/api/seed-user", { method: "POST" })
+    fetch(`${API_BASE_URL}/api/seed-user`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => console.log("✅ Seed response:", data))
       .catch((err) => console.error("❌ Seeding error:", err));
@@ -47,7 +50,7 @@ const LoginPage: React.FC = () => {
     }
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch(`${API_BASE_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
