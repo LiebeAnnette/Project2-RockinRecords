@@ -13,7 +13,7 @@ const collaborators = [
     name: "Matt Bloch",
     image: "/assets/images/matt-pic.jpg",
     bio: "NavBar engineer responsible for links and bug extermination.",
-    GitHub: "",
+    GitHub: "https://github.com/MattB-ks",
   },
   {
     name: "Fischer Almanza",
@@ -72,7 +72,7 @@ export default function CollaboratorsPage() {
       </button>
 
       <div
-        className={classNames({
+      className={classNames({
           "transition-opacity": true,
           "opacity-0": !fade,
           "opacity-100": fade,
