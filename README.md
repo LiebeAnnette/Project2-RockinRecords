@@ -17,6 +17,14 @@ Rockin' Records is a full-stack music collection manager where users can browse,
 - **Database**: PostgreSQL
 - **Environment**: TypeScript, dotenv, nodemon, sequelize-cli
 
+## 🌍 Live Demo
+
+Check out the deployed app here 👉 [Rockin' Records on Render](https://project2-rockinrecords.onrender.com)
+
+> ⚠️ _May take a few seconds to load on first launch due to free-tier server spin-up._
+
+
+
 
 ## 🧪 Local Setup
 
@@ -91,6 +99,7 @@ npm run dev
 - Album artwork and metadata via external APIs
 
 ---
+
 
 ## 📄 License
 
