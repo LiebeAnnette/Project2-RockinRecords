@@ -10,7 +10,8 @@ import CurrentLibraryPage from "./pages/CurrentLibrary/index.tsx";
 import ErrorPage from "./pages/ErrorPage/index.tsx";
 import { RecordProvider } from "./context/recordContext";
 import GenresPage from "./pages/GenresPage.tsx";
-import CollaboratorsPage from "./pages/CollaboratorsPage.tsx"; 
+import CollaboratorsPage from "./pages/CollaboratorsPage.tsx";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "login",
@@ -33,16 +38,20 @@ const router = createBrowserRouter([
 
       {
         path: "genres",
-        element: <GenresPage />
+        element: <GenresPage />,
       },
       {
         path: "collaborators",
-        element: <CollaboratorsPage />
+        element: <CollaboratorsPage />,
       },
       {
         path: "current-library",
 
-        element: <CurrentLibraryPage />,
+        element: (
+          <ProtectedRoute>
+            <CurrentLibraryPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

@@ -1,5 +1,6 @@
 import express from "express";
 import Record from "../../models/record";
+import { authenticateToken, AuthRequest } from "../../middleware/auth";
 const router = express.Router();
 
 // GET /api/records – Get all records for a user (temp: all records)
@@ -32,6 +33,19 @@ router.post("/", async (req, res) => {
     res.status(201).json(newRecord);
   } catch (error) {
     res.status(500).json({ message: "Error creating record", error });
+  }
+});
+
+router.get("/library", authenticateToken, async (req: AuthRequest, res) => {
+  try {
+    const userId = req.user.id;
+
+    const records = await Record.findAll({ where: { userId } });
+
+    res.json(records);
+  } catch (err) {
+    console.error("Error fetching user records:", err);
+    res.status(500).json({ message: "Failed to fetch records" });
   }
 });
 
