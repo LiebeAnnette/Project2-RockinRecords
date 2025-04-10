@@ -1,5 +1,7 @@
 # 🎸 Rockin' Records
+
 <!-- README IN PROGRESS - MINA -->
+
 Rockin' Records is a full-stack music collection manager where users can browse, search, and contribute to a growing digital vinyl archive. Built collaboratively with Express, PostgreSQL, and Sequelize, the app helps music lovers keep track of artists, albums, and more.
 
 ## 🚀 Features
@@ -23,9 +25,6 @@ Check out the deployed app here 👉 [Rockin' Records on Render](https://project
 
 > ⚠️ _May take a few seconds to load on first launch due to free-tier server spin-up._
 
-
-
-
 ## 🧪 Local Setup
 
 ### 1. Clone the repo
@@ -44,23 +43,23 @@ npm install
 ### 3. Set up your `.env`
 
 ```bash
-DB_NAME=myvinyl_db
-DB_USER=postgres
-DB_PASSWORD=root
+DB_NAME=YOUR_DB_NAME
+DB_USER=YOUR_DB_USER
+DB_PASSWORD=YOUR_DB_PASSWORD
 DB_HOST=localhost
 DB_PORT=5432
-JWT_SECRET=superSecretStringHere
+JWT_SECRET=YOUR_SECRET_KEY
+
 ```
 
 Or edit `config/config.json` if using that instead of `.env`.
+
 ### Demo Login
 
 - **Username**: `testuser`
 - **Password**: `test1234`
 
 > ⚠️ _Your browser may warn that this password is commonly used — this is expected in demo environments._
-
-
 
 ### 4. Create the database
 
@@ -100,8 +99,6 @@ npm run dev
 
 ---
 
-
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
-
