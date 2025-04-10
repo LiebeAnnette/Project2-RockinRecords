@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 export interface Record {
   id?: number;
   album: string;
@@ -23,7 +25,7 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const fetchRecords = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("/api/library", {
+      const res = await fetch(`${API_BASE_URL}/api/library`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -47,7 +49,7 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const userId = payload.id;
 
     try {
-      const response = await fetch("/api/records", {
+      const response = await fetch(`${API_BASE_URL}/api/library`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +77,7 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const token = localStorage.getItem("token");
   
     try {
-      const res = await fetch(`/api/records/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/records/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
