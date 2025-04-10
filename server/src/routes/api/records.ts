@@ -16,16 +16,16 @@ router.get("/", async (req, res) => {
 // POST /api/records – Add a new record
 router.post("/", async (req, res) => {
   try {
-    const { title, artist, userId } = req.body;
+    const { album, artist, userId } = req.body;
 
-    if (!title || !artist || !userId) {
+    if (!album || !artist || !userId) {
       return res
         .status(400)
-        .json({ message: "Title, artist, and userId are required." });
+        .json({ message: "Album, artist, and userId are required." });
     }
 
     const newRecord = await Record.create({
-      title,
+      album,
       artist,
       userId,
     });
@@ -46,6 +46,25 @@ router.get("/library", authenticateToken, async (req: AuthRequest, res) => {
   } catch (err) {
     console.error("Error fetching user records:", err);
     res.status(500).json({ message: "Failed to fetch records" });
+  }
+});
+
+router.delete("/:id", authenticateToken, async (req: AuthRequest, res) => {
+  try {
+    const recordId = req.params.id;
+    const userId = req.user.id;
+
+    const record = await Record.findOne({ where: { id: recordId, userId } });
+
+    if (!record) {
+      return res.status(404).json({ message: "Record not found or unauthorized." });
+    }
+
+    await record.destroy();
+    res.status(204).end();
+  } catch (err) {
+    console.error("Error deleting record:", err);
+    res.status(500).json({ message: "Failed to delete record." });
   }
 });
 

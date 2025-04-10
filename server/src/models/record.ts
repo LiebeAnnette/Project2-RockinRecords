@@ -1,10 +1,10 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/config";
+import sequelize from "../config/database";
 import User from "./user"; 
 
 interface RecordAttributes {
   id?: number;
-  title: string;
+  album: string;
   artist: string;
   userId: number;
   createdAt?: Date;
@@ -13,7 +13,7 @@ interface RecordAttributes {
 
 class Record extends Model<RecordAttributes> implements RecordAttributes {
   public id?: number;
-  public title!: string;
+  public album!: string;
   public artist!: string;
   public userId!: number;
 
@@ -28,7 +28,7 @@ Record.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    title: {
+    album: {
       type: DataTypes.STRING,
       allowNull: false,
     },

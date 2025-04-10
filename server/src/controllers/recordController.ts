@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
 const records = [
-  { id: 1, title: "Rumours", artist: "Fleetwood Mac" },
-  { id: 2, title: "Abbey Road", artist: "The Beatles" },
+  { id: 1, album: "Rumours", artist: "Fleetwood Mac" },
+  { id: 2, album: "Abbey Road", artist: "The Beatles" },
 ];
 
 const getAllRecords = (_req: Request, res: Response) => {
@@ -10,16 +10,16 @@ const getAllRecords = (_req: Request, res: Response) => {
 };
 
 const createRecord = (req: Request, res: Response) => {
-  const { title, artist } = req.body;
+  const { album, artist } = req.body;
 
-  if (!title || !artist) {
-    res.status(400).json({ error: "Title and artist are required" });
+  if (!album || !artist) {
+    res.status(400).json({ error: "Album and artist are required" });
     return;
   }
 
   const newRecord = {
     id: records.length + 1,
-    title,
+    album,
     artist,
   };
 

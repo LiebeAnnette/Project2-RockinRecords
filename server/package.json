@@ -4,13 +4,15 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node dist/server.js",
-    "dev": "nodemon",
-    "seed": "node dist/seeds/index.js",
-    "sequelize": "sequelize-cli",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "build": "tsc",
+  "start": "npm run build && node dist/server.js",
+  "dev": "nodemon",
+  "seed": "node dist/seeds/index.js",
+  "db:drop": "npx sequelize-cli db:drop --config ../sequelize-config.js",
+  "db:create": "npx sequelize-cli db:create --config ../sequelize-config.js",
+  "db:migrate": "npx sequelize-cli db:migrate --config ../sequelize-config.js",
+  "db:seed": "npx sequelize-cli db:seed:all --config ../sequelize-config.js"
+},
   "nodemonConfig": {
     "watch": [
       "src"
@@ -31,7 +33,9 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
-    "sequelize-cli": "^6.6.2",
-    "typescript": "^5.4.5"
+    "@types/node": "^22.14.0",
+    "sequelize-cli": "^6.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

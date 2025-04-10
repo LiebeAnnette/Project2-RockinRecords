@@ -1,4 +1,4 @@
-import { QueryInterface, DataTypes } from "sequelize";
+import { QueryInterface, DataTypes, Sequelize } from "sequelize";
 
 export default {
   up: async (queryInterface: QueryInterface) => {
@@ -9,7 +9,7 @@ export default {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      title: {
+      album: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -21,7 +21,7 @@ export default {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "Users", // 👈 Make sure this matches your table name
+          model: "Users", // ⚠️ Ensure your user table is named exactly "Users"
           key: "id",
         },
         onDelete: "CASCADE",
@@ -29,15 +29,16 @@ export default {
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
-        defaultValue: new Date(),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
-        defaultValue: new Date(),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
+
   down: async (queryInterface: QueryInterface) => {
     await queryInterface.dropTable("Records");
   },
