@@ -1,9 +1,12 @@
-
 import express from "express";
 import cors from "cors";
-import fetch from "node-fetch"; 
+import fetch from "node-fetch";
 import { connectToDatabase } from "./models/index";
 import routes from "./routes/index";
+
+import recordsRoute from "./routes/api/records";
+
+routes.use("/", recordsRoute);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,6 +17,13 @@ app.use(express.json());
 
 // Routes
 app.use(routes);
+
+app.use("/api", routes);
+
+// ✅ Health check route
+app.get("/api/status", (req, res) => {
+  res.json({ message: "API is up and running 🚀" });
+});
 
 app.get("/api/genres", async (_req, res) => {
   try {
@@ -29,7 +39,9 @@ app.get("/api/genres", async (_req, res) => {
 app.get("/api/genre/:genreId/artists", async (req, res) => {
   const { genreId } = req.params;
   try {
-    const response = await fetch(`https://api.deezer.com/genre/${genreId}/artists`);
+    const response = await fetch(
+      `https://api.deezer.com/genre/${genreId}/artists`
+    );
     const data = await response.json();
     res.json(data);
   } catch (err) {
@@ -41,7 +53,9 @@ app.get("/api/genre/:genreId/artists", async (req, res) => {
 app.get("/api/artist/:artistId/top", async (req, res) => {
   const { artistId } = req.params;
   try {
-    const response = await fetch(`https://api.deezer.com/artist/${artistId}/top?limit=10`);
+    const response = await fetch(
+      `https://api.deezer.com/artist/${artistId}/top?limit=10`
+    );
     const data = await response.json();
     res.json(data);
   } catch (err) {
