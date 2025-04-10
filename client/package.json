@@ -11,8 +11,10 @@
     "start-proxy": "node -e \"require('cors-anywhere').createServer({ originWhitelist: [], requireHeader: ['origin','x-requested-with'], removeHeaders: ['cookie','cookie2'] }).listen(8080, () => console.log('🚀 Proxy running on http://localhost:8080'))\""
   },
   "dependencies": {
+    "bootstrap": "^5.3.5",
     "classnames": "^2.5.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.9",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1"
   },

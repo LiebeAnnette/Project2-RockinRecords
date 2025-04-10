@@ -1,8 +1,29 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useRecord } from "../../context/recordContext";
+import { authFetch } from "../../services/api";
+
+type RecordType = {
+  album: string;
+  artist: string;
+  yearReleased: string; // or number, depending on your DB
+};
 
 const CurrentLibraryPage = () => {
-  const { records } = useRecord();
+  const [records, setRecords] = useState<RecordType[]>([]);
+
+  useEffect(() => {
+    const fetchRecords = async () => {
+      try {
+        const res = await authFetch("/api/library");
+        const data = await res.json();
+        setRecords(data);
+      } catch (err) {
+        console.error("Failed to fetch library", err);
+      }
+    };
+
+    fetchRecords();
+  }, []);
 
   return (
     <div className="library-page">
@@ -20,7 +41,9 @@ const CurrentLibraryPage = () => {
               >
                 {record.album}
               </Link>{" "}
-              <span className="text-gray">by {record.artist} ({record.yearReleased})</span>
+              <span className="text-gray">
+                by {record.artist} ({record.yearReleased})
+              </span>
             </li>
           ))
         )}

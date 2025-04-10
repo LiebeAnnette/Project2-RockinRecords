@@ -2,31 +2,58 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
+export const authFetch = (url: string, options: RequestInit = {}) => {
+  const token = localStorage.getItem("token");
+
+  return fetch(url, {
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (username === '' || password === '') {
-      setErrorMessage('Please enter both username and password');
+    if (username === "" || password === "") {
+      setErrorMessage("Please enter both username and password");
       return;
-  }
+    }
 
-  try {
-    // This is where we would call our API for real login (JWT)
-    // For now, we are simulating a successful login with the useAuth hook
-    login();
-    navigate('/');
-  } catch (error) {
-    setErrorMessage('Invalid username or password');
-  }
-};
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data.message || "Login failed");
+        return;
+      }
+
+      localStorage.setItem("token", data.token); // Save JWT!
+      login(); // Still call your context or global login handler
+      navigate("/");
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrorMessage("Something went wrong, please try again.");
+    }
+  };
 
   return (
     <div className="login-background">
@@ -61,7 +88,9 @@ const LoginPage: React.FC = () => {
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        <button type="submit" className="submit-btn">Login</button>
+        <button type="submit" className="submit-btn">
+          Login
+        </button>
       </form>
     </div>
   );
