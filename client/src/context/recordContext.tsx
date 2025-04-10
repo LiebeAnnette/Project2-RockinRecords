@@ -1,13 +1,18 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface Record {
-  artist: string;
+export interface Record {
+  id?: number;
   album: string;
+  artist: string;
+  userId?: number;
 }
+
 
 interface RecordContextType {
   records: Record[];
   addRecord: (newRecord: Record) => Promise<void>;
+  fetchRecords: () => Promise<void>;
+  deleteRecord: (id: number) => Promise<void>;
 }
 
 const RecordContext = createContext<RecordContextType | undefined>(undefined);
@@ -15,13 +20,31 @@ const RecordContext = createContext<RecordContextType | undefined>(undefined);
 export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [records, setRecords] = useState<Record[]>([]);
 
+  const fetchRecords = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch("/api/library", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      setRecords(data);
+    } catch (err) {
+      console.error("Failed to fetch records", err);
+    }
+  };
+
   const addRecord = async (newRecord: Record) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      console.error("No token found. User might not be authenticated.");
+      console.error("No token found. User might not be logged in/")
       return;
     }
+
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    const userId = payload.id;
 
     try {
       const response = await fetch("/api/records", {
@@ -30,22 +53,47 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) 
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(newRecord),
+        body: JSON.stringify({
+          artist: newRecord.artist,
+          album: newRecord.album,
+          userId,
+        }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to save record to the database.");
       }
 
-      const savedRecord = await response.json();
-      setRecords((prev) => [...prev, savedRecord]);
+      await response.json();
+
+      await fetchRecords();
     } catch (err) {
-      console.error("Error saving record:", err);
+      console.log("Error saving record;", err);
+    }
+  };
+  const deleteRecord = async (id: number) => {
+    const token = localStorage.getItem("token");
+  
+    try {
+      const res = await fetch(`/api/records/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to delete record");
+      }
+  
+      await fetchRecords();
+    } catch (err) {
+      console.error("Error deleting record", err);
     }
   };
 
   return (
-    <RecordContext.Provider value={{ records, addRecord }}>
+    <RecordContext.Provider value={{ records, addRecord, fetchRecords, deleteRecord }}>
       {children}
     </RecordContext.Provider>
   );

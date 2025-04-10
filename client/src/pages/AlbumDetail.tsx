@@ -2,7 +2,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 interface DiscogsResult {
-  title: string;
+  album: string;
   year?: number;
   cover_image?: string;
   country?: string;
@@ -11,7 +11,7 @@ interface DiscogsResult {
 }
 
 function AlbumDetail() {
-  const { title } = useParams<{ title: string }>();
+  const { album } = useParams<{ album: string }>();
   const navigate = useNavigate();
   const location = useLocation();
   const artist = location.state?.artist;
@@ -21,18 +21,18 @@ function AlbumDetail() {
 
   useEffect(() => {
     async function fetchDiscogsData() {
-      if (!title) return;
+      if (!album) return;
 
       // Save search to localStorage
       const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
-      if (!history.includes(title)) {
-        localStorage.setItem("searchHistory", JSON.stringify([...history, title]));
+      if (!history.includes(album)) {
+        localStorage.setItem("searchHistory", JSON.stringify([...history, album]));
       }
 
       try {
         const res = await fetch(
           `https://api.discogs.com/database/search?q=${encodeURIComponent(
-            title
+            album
           )}&type=release&per_page=1&token=FNAmnDyRyqernsKLCkYrniZgdXLRhYErDlFNRqbz`
         );
         const data = await res.json();
@@ -50,15 +50,15 @@ function AlbumDetail() {
     }
 
     fetchDiscogsData();
-  }, [title]);
+  }, [album]);
   useEffect(() => {
     async function fetchDiscogsData() {
-      if (!title) return;
+      if (!album) return;
       // ... Discogs logic
     }
 
     fetchDiscogsData();
-  }, [title]);
+  }, [album]);
 
   // 👇 Paste your YouTube fetch effect here:
   useEffect(() => {
@@ -113,12 +113,12 @@ function AlbumDetail() {
         <p>Loading...</p>
       ) : albumData ? (
         <div>
-          <h1 className="text-2xl font-bold mb-2">{albumData.title}</h1>
+          <h1 className="text-2xl font-bold mb-2">{albumData.album}</h1>
 
           {albumData.cover_image && (
             <img
               src={albumData.cover_image}
-              alt={albumData.title}
+              alt={albumData.album}
               className="w-64 mb-4 cursor-pointer"
               onClick={() => {
                 const imageUrl = albumData.cover_image!;
@@ -128,7 +128,7 @@ function AlbumDetail() {
                   newWin.document.write(`
                     <html>
                       <head>
-                        <title>${albumData.title}</title>
+                        <title>${albumData.album}</title>
                         <style>
                           html, body {
                             margin: 0;
@@ -175,7 +175,7 @@ function AlbumDetail() {
                 <ul>
                   {videos.map((video, i) => (
                     <li key={i} className="mb-4">
-                      <p className="font-semibold">{video.snippet.title}</p>
+                      <p className="font-semibold">{video.snippet.album}</p>
                       <a
                         href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
                         target="_blank"
@@ -194,7 +194,7 @@ function AlbumDetail() {
           )}
         </div>
       ) : (
-        <p>No results found for "{title}"</p>
+        <p>No results found for "{album}"</p>
       )}
     </div>
   );

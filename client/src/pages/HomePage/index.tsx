@@ -42,28 +42,6 @@ const HomePage = () => {
             Collaborators
           </Link>
         </section>
-
-        {/* <section className="library">
-          <h2>Your Library</h2>
-          <ul>
-            {[
-              { title: "Rumours", artist: "Fleetwood Mac" },
-              { title: "Abbey Road", artist: "The Beatles" },
-              { title: "Thriller", artist: "Michael Jackson" },
-            ].map((album) => (
-              <li key={album.title} className="album-entry">
-                <Link
-                  to={`/album/${encodeURIComponent(album.title)}`}
-                  state={{ artist: album.artist }}
-                  className="btn-link"
-                >
-                  {album.title}
-                </Link>{" "}
-                <span className="text-gray">by {album.artist}</span>
-              </li>
-            ))}
-          </ul>
-        </section> */}
       </main>
 
       {showModal && <RecordModal closeModal={closeModal} />}

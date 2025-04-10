@@ -1,4 +1,4 @@
-import sequelize from "../config/config";
+import sequelize from "../config/database";
 import Record from "./record";
 import User from "./user";
 

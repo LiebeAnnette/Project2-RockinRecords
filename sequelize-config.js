@@ -1,9 +1,9 @@
+require("ts-node/register");
+
+const config = require("./server/src/config/sequelize-config.ts").default;
+
 module.exports = {
-  development: {
-    username: "postgres",
-    password: "root", // replace with your actual password
-    database: "myvinyl_db",
-    host: "127.0.0.1",
-    dialect: "postgres",
-  },
+  development: config.development,
+  test: config.test || config.development,
+  production: config.production || config.development,
 };
