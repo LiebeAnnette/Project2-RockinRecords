@@ -14,27 +14,20 @@ import loginRoute from "./routes/api/login";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
-// Serve static frontend from client/dist
-app.use(express.static(path.resolve(__dirname, "..", "..", "client", "dist")));
 
-// Fallback to index.html for React Router
-app.get("/", (_req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "..", "client", "dist", "index.html"));
-});
-
-// Routes
+// ✅ Mount API routes FIRST
 routes.use("/records", recordsRoute);
 routes.use("/login", loginRoute);
-app.use("/api", routes);
+app.use(routes);
 
-// ✅ Health check route
+// ✅ Health check
 app.get("/api/status", (req, res) => {
   res.json({ message: "API is up and running 🚀" });
 });
 
+// ✅ Deezer API routes
 app.get("/api/genres", async (_req, res) => {
   try {
     const response = await fetch("https://api.deezer.com/genre");
@@ -49,9 +42,7 @@ app.get("/api/genres", async (_req, res) => {
 app.get("/api/genre/:genreId/artists", async (req, res) => {
   const { genreId } = req.params;
   try {
-    const response = await fetch(
-      `https://api.deezer.com/genre/${genreId}/artists`
-    );
+    const response = await fetch(`https://api.deezer.com/genre/${genreId}/artists`);
     const data = await response.json();
     res.json(data);
   } catch (err) {
@@ -63,9 +54,7 @@ app.get("/api/genre/:genreId/artists", async (req, res) => {
 app.get("/api/artist/:artistId/top", async (req, res) => {
   const { artistId } = req.params;
   try {
-    const response = await fetch(
-      `https://api.deezer.com/artist/${artistId}/top?limit=10`
-    );
+    const response = await fetch(`https://api.deezer.com/artist/${artistId}/top?limit=10`);
     const data = await response.json();
     res.json(data);
   } catch (err) {
@@ -74,13 +63,15 @@ app.get("/api/artist/:artistId/top", async (req, res) => {
   }
 });
 
-// Root route
+// ✅ Serve frontend LAST
+app.use(express.static(path.resolve(__dirname, "..", "..", "client", "dist")));
+
 app.get("*", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "..", "client", "dist", "index.html"));
 });
 
+// ✅ Connect DB and start server
 connectToDatabase();
-
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

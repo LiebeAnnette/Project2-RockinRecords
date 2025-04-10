@@ -1,5 +1,4 @@
 # 🎸 Rockin' Records
-<!-- README IN PROGRESS - MINA -->
 Rockin' Records is a full-stack music collection manager where users can browse, search, and contribute to a growing digital vinyl archive. Built collaboratively with Express, PostgreSQL, and Sequelize, the app helps music lovers keep track of artists, albums, and more.
 
 ## 🚀 Features
@@ -22,6 +21,15 @@ Rockin' Records is a full-stack music collection manager where users can browse,
 Check out the deployed app here 👉 [Rockin' Records on Render](https://project2-rockinrecords.onrender.com)
 
 > ⚠️ _May take a few seconds to load on first launch due to free-tier server spin-up._
+
+
+## 🖼 Screenshots
+
+### 🔐 Login Page
+<img src="assets/login-screenshot.png" alt="Login Page Screenshot" width="600" />
+
+### 📚 Current Library View
+<img src="assets/library-screenshot.png" alt="Library Screenshot" width="600" />
 
 
 
