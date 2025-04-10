@@ -43,7 +43,7 @@ const HomePage = () => {
           </Link>
         </section>
 
-        <section className="library">
+        {/* <section className="library">
           <h2>Your Library</h2>
           <ul>
             {[
@@ -63,7 +63,7 @@ const HomePage = () => {
               </li>
             ))}
           </ul>
-        </section>
+        </section> */}
       </main>
 
       {showModal && <RecordModal closeModal={closeModal} />}

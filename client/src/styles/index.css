@@ -390,3 +390,55 @@ body {
     transform: rotate(360deg);
   }
 }
+/* ========== View Current Library Page Styles ========== */
+
+.library-page {
+  background-image: url('/assets/images/record.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  margin: 0;
+  border: none;
+}
+
+.library-page h1 {
+  font-size: 2rem;
+  text-decoration: underline #ff3028;
+  margin-bottom: 2rem;
+}
+
+.library-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.library-list li {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.btn-link {
+  color: white;
+  text-decoration: underline #ff3028;
+  font-weight: bold;
+}
+
+.btn-link:hover {
+  color: #ff3028;
+}
+
+/* ========== Button Hover Color for Homepage ========== */
+.btn:hover {
+  background-color: #8B0000 !important; /* Dark red */
+  top: 2px;
+  box-shadow: 0 2px 0 #1a1a1a, 0 2px 4px rgba(0, 0, 0, 0.3);
+}
