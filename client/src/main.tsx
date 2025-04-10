@@ -1,3 +1,4 @@
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -11,7 +12,6 @@ import ErrorPage from "./pages/ErrorPage/index.tsx";
 import { RecordProvider } from "./context/recordContext";
 import GenresPage from "./pages/GenresPage.tsx";
 import CollaboratorsPage from "./pages/CollaboratorsPage.tsx";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -21,11 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <ProtectedRoute>
-            <HomePage />
-          </ProtectedRoute>
-        ),
+        element: <HomePage />,
       },
       {
         path: "login",
@@ -35,7 +31,10 @@ const router = createBrowserRouter([
         path: "album/:title",
         element: <AlbumDetail />,
       },
-
+      {
+        path: "current-library",
+        element: <CurrentLibraryPage />,
+      },
       {
         path: "genres",
         element: <GenresPage />,
@@ -43,15 +42,6 @@ const router = createBrowserRouter([
       {
         path: "collaborators",
         element: <CollaboratorsPage />,
-      },
-      {
-        path: "current-library",
-
-        element: (
-          <ProtectedRoute>
-            <CurrentLibraryPage />
-          </ProtectedRoute>
-        ),
       },
     ],
   },
