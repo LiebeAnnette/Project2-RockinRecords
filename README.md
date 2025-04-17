@@ -27,10 +27,10 @@ Check out the deployed app here 👉 [Rockin' Records on Render](https://project
 ## 🖼 Screenshots
 
 ### 🔐 Login Page
-<img src="assets/login-screenshot.png" alt="Login Page Screenshot" width="600" />
+<img src="./client/public/assets/images/login-screenshot.png" alt="Login Page Screenshot" width="600" />
 
 ### 📚 Current Library View
-<img src="assets/library-screenshot.png" alt="Library Screenshot" width="600" />
+<img src="./client/public/assets/images/home-screenshot.png" alt="Home Screenshot" width="600" />
 
 
 
