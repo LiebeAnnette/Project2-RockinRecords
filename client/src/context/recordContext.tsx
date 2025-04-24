@@ -25,7 +25,7 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const fetchRecords = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`${API_BASE_URL}/api/library`, {
+      const res = await fetch(`${API_BASE_URL}/api/records/library`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -49,7 +49,7 @@ export const RecordProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const userId = payload.id;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/library`, {
+      const response = await fetch(`${API_BASE_URL}/api/records`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

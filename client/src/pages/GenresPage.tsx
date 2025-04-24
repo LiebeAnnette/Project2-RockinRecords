@@ -24,7 +24,7 @@ const GenresPage: React.FC = () => {
 
   useEffect(() => {
     console.log("Fetching genres...");
-    fetch('http://localhost:5000/api/genres')
+    fetch('/api/genres')
       .then((res) => res.json())
       .then((data) => {
         if (data.data) {
@@ -46,7 +46,7 @@ const GenresPage: React.FC = () => {
 
     try {
       console.log(`🎯 Fetching artists for genre: ${genre.name} (${genre.id})`);
-      const artistRes = await fetch(`http://localhost:5000/api/genre/${genre.id}/artists`);
+      const artistRes = await fetch(`/api/genre/${genre.id}/artists`);
       const artistData = await artistRes.json();
       console.log('👤 Artist API Response:', artistData);
 
@@ -58,7 +58,7 @@ const GenresPage: React.FC = () => {
       const artist: Artist = artistData.data[0];
       console.log(`🎤 Selected artist: ${artist.name} (${artist.id})`);
 
-      const trackRes = await fetch(`http://localhost:5000/api/artist/${artist.id}/top`);
+      const trackRes = await fetch(`/api/artist/${artist.id}/top`);
       const trackData = await trackRes.json();
       console.log('🎵 Track API Response:', trackData);
 
